@@ -61,7 +61,7 @@
 		#grid {
 			display: grid;
 			grid-template-columns: 1fr 1fr;
-			width: min-content;
+			width: fit-content;
 			gap: 10px;
 			margin-bottom: 10px;
 		}
@@ -83,6 +83,10 @@
 					Scroll
 				</label>
 				<input type="checkbox" name="scroll" title="If checked, the starfield will slowly move. Decreases performance.">
+				<label title="If checked, the starfield will have some big stars." for="size-high">
+					Big stars
+				</label>
+				<input type="checkbox" name="size-high" title="If checked, the starfield will have some big stars.">
 				<label title="Controls the amount of color the stars will have." for="color">
 					Color
 				</label>

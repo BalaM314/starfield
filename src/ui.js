@@ -4,6 +4,7 @@ const canvas = getElement("canvas", HTMLCanvasElement);
 const field = new Starfield(canvas);
 const search = new URLSearchParams(location.search);
 const scroll = search.has("scroll");
+const bigStars = search.has("size-high");
 switch (search.get("color")) {
     case "none":
         field.starColors = Random.weightedPool([
@@ -67,6 +68,20 @@ switch (search.get("density")) {
     case "very-high":
         field.starDensity = 0.08;
         break;
+}
+if (bigStars) {
+    field.starSize = Random.weightedPool([
+        [0.2, 160],
+        [0.4, 120],
+        [0.6, 80],
+        [0.8, 60],
+        [1.0, 60],
+        [1.3, 40],
+        [1.7, 20],
+        [2.8, 5],
+        [8, 1],
+        [14, 1],
+    ]);
 }
 let frame = 0;
 let needsRedraw = false;

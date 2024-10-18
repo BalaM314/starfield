@@ -36,7 +36,7 @@ export class Starfield {
     [1.3, 40],
     [1.7, 20],
     [2.8, 5],
-    [5.5, 1],
+    [6, 1],
   ]);
   starBrightness:number[] = Random.weightedPool([
     [0.2, 15],
@@ -71,11 +71,17 @@ export class Starfield {
       this.ctx.globalAlpha = star.brightness;
       this.ctx.beginPath();
       if(star.size > this.largeStarSize){
-        this.ctx.moveTo(star.x + star.size / 2, star.y);
-        this.ctx.lineTo(star.x, star.y + star.size / 2);
-        this.ctx.lineTo(star.x - star.size / 2, star.y);
-        this.ctx.lineTo(star.x, star.y - star.size / 2);
-        this.ctx.lineTo(star.x + star.size / 2, star.y);
+        const r = star.size / 2;
+        this.ctx.moveTo(star.x, star.y - r);
+        this.ctx.arc(star.x - r, star.y - r, r, 0, Math.PI / 2);
+        this.ctx.arc(star.x - r, star.y + r, r, Math.PI * 3 / 2, Math.PI * 2);
+        this.ctx.arc(star.x + r, star.y + r, r, Math.PI, Math.PI * 3 / 2);
+        this.ctx.arc(star.x + r, star.y - r, r, Math.PI / 2, Math.PI);
+        // this.ctx.moveTo(star.x + star.size / 2, star.y);
+        // this.ctx.lineTo(star.x, star.y + star.size / 2);
+        // this.ctx.lineTo(star.x - star.size / 2, star.y);
+        // this.ctx.lineTo(star.x, star.y - star.size / 2);
+        // this.ctx.lineTo(star.x + star.size / 2, star.y);
       } else {
         this.ctx.ellipse(star.x, star.y, star.size / 2, star.size / 2, 0, 0, Math.PI * 2);
       }
