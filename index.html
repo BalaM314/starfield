@@ -4,12 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <script type="module" src="src/ui.js" defer></script>
-  <link rel="stylesheet" href="index.css">
 </head>
 <body>
-  <canvas id="canvas">
-
-  </canvas>
+  <h1>Starfield generator</h1>
+  <form action="starfield.html" method="get">
+    <label title="If checked, the starfield will slowly move. Decreases performance.">
+      Scroll
+      <input type="checkbox" name="scroll">
+    </label>
+    <br>
+    <label title="Controls the amount of color the stars will have.">
+      Color
+      <select name="color">
+        <option value="none">None</option>
+        <option value="low">Low</option>
+        <option value="medium" selected>Medium</option>
+        <option value="high">High</option>
+        <option value="very-high">Very High</option>
+      </select>
+    </label>
+    <br>
+    <label title="Controls the number of stars.">
+      Density
+      <select name="density">
+        <option value="very-low">Very Low</option>
+        <option value="low">Low</option>
+        <option value="medium" selected>Medium</option>
+        <option value="high">High</option>
+        <option value="very-high">Very High</option>
+      </select>
+    </label>
+    <br>
+    <button type="submit">Open starfield</button>
+  </form>
 </body>
 </html>

@@ -1,10 +1,76 @@
 import { Starfield } from "./starfield.js";
-import { getElement, Rand } from "./utils.js";
+import { getElement, Rand, Random } from "./utils.js";
 
 const canvas = getElement("canvas", HTMLCanvasElement);
 
 const field = new Starfield(canvas);
-const shouldScroll = new URLSearchParams(location.search).has("scroll");
+const search = new URLSearchParams(location.search);
+const scroll = search.has("scroll");
+switch(search.get("color")){
+  case "none":
+    field.starColors = Random.weightedPool([
+      ["#FFF", 1],
+    ]);
+    break;
+  case "low":
+    field.starColors = Random.weightedPool([
+      ["#FFF", 15],
+      ["#F77", 1],
+      ["#F84", 1],
+      ["#22A", 1],
+    ]);
+    break;
+  case "medium":
+    field.starColors = Random.weightedPool([
+      ["#FFF", 90],
+      ["#F77", 18],
+      ["#F84", 8],
+      ["#FF7", 15],
+      ["#4AF", 1],
+      ["#22A", 12],
+      ["#F4F", 1],
+    ]);
+    break;
+  case "high":
+    field.starColors = Random.weightedPool([
+      ["#FFF", 20],
+      ["#F77", 6],
+      ["#F84", 3],
+      ["#FF7", 5],
+      ["#4AF", 1],
+      ["#22A", 4],
+      ["#F4F", 1],
+    ]);
+    break;
+  case "very-high":
+    field.starColors = Random.weightedPool([
+      ["#F66", 90],
+      ["#AA6", 90],
+      ["#FFF", 90],
+      ["#6AA", 90],
+      ["#66F", 90],
+      ["#A6A", 90],
+    ]);
+    break;
+}
+switch(search.get("density")){
+  case "very-low":
+    field.starDensity = 0.003;
+    break;
+  case "low":
+    field.starDensity = 0.007;
+    break;
+  case "medium":
+    field.starDensity = 0.015;
+    break;
+  case "high":
+    field.starDensity = 0.05;
+    break;
+  case "very-high":
+    field.starDensity = 0.08;
+    break;
+}
+
 
 declare global {
   var cancel: number;
@@ -28,7 +94,7 @@ function loop(){
     field.generate();
     needsRedraw = true;
   }
-  if(frame % 4 == 0 && shouldScroll){
+  if(frame % 4 == 0 && scroll){
     field.scrollWrap(0.3, 0.1);
     needsRedraw = true;
   }
