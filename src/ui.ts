@@ -128,6 +128,12 @@ addEventListener("keydown", e => {
     needsRedraw = true;
   }
 });
+addEventListener("click", e => {
+  if(e.button == 0){
+    field.generate();
+    needsRedraw = true;
+  }
+});
 
 Object.assign(window, { field, Rand });
 
