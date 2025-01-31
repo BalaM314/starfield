@@ -79,10 +79,15 @@
 		<h1 id="header">Starfield Generator</h1>
 		<form action="starfield.html" method="get">
 			<div id="grid">
-				<label title="If checked, the starfield will slowly move. Decreases performance." for="scroll">
+				<label title="If selected, the starfield will slowly move. Decreases performance." for="scroll">
 					Scroll
 				</label>
-				<input type="checkbox" name="scroll" title="If checked, the starfield will slowly move. Decreases performance.">
+				<select name="scroll" title="If selected, the starfield will slowly move. Decreases performance.">
+					<option value="none" selected>None</option>
+					<option value="low">Very Slow</option>
+					<option value="medium">Slow</option>
+					<option value="high">Medium</option>
+				</select>
 				<label title="If checked, the starfield will have some big stars." for="size-high">
 					Big stars
 				</label>

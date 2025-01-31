@@ -1,11 +1,16 @@
 import { Starfield } from "./starfield.js";
-import { getElement, Rand, Random } from "./utils.js";
+import { getElement, match, Rand, Random } from "./utils.js";
 
 const canvas = getElement("canvas", HTMLCanvasElement);
 
 const field = new Starfield(canvas);
 const search = new URLSearchParams(location.search);
-const scroll = search.has("scroll");
+const scrollSpeed = match(search.get("scroll") ?? "none", {
+  none: 0,
+  low: 0.08,
+  medium: 0.14,
+  high: 0.24,
+}, 0);
 const bigStars = search.has("size-high");
 switch(search.get("color")){
   case "none":
@@ -110,8 +115,9 @@ function loop(){
     field.generate();
     needsRedraw = true;
   }
-  if(frame % 4 == 0 && scroll){
-    field.scrollWrap(0.3, 0.1);
+  if(frame % 4 == 0 && scrollSpeed != 0){
+    let scaledScrollSpeed = (canvas.width / 1920) * scrollSpeed;
+    field.scrollWrap(3 * scaledScrollSpeed, 1 * scaledScrollSpeed);
     needsRedraw = true;
   }
   if(needsRedraw){

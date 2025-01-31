@@ -11,6 +11,12 @@ export function getElement<T extends typeof HTMLElement>(id:string, type:T, mode
 	else crash(`Element with id ${id} does not exist`);
 }
 
+export function match<K extends PropertyKey, O extends Record<K, unknown>>(value:K, clauses:O):O[K];
+export function match<K extends PropertyKey, const O extends Partial<Record<K, unknown>>, D>(value:K, clauses:O, defaultValue:D):O[K & keyof O] | D;
+export function match(value:PropertyKey, clauses:Record<PropertyKey, unknown>, defaultValue?:unknown):unknown {
+	return Object.prototype.hasOwnProperty.call(clauses, value) ? clauses[value] : defaultValue;
+}
+
 export class Random {
 	constructor(public _rand:() => number){}
 	/** Returns a random integer between 0 and `max` inclusive. */

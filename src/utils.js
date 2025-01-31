@@ -11,6 +11,9 @@ export function getElement(id, type, mode = "id") {
     else
         crash(`Element with id ${id} does not exist`);
 }
+export function match(value, clauses, defaultValue) {
+    return Object.prototype.hasOwnProperty.call(clauses, value) ? clauses[value] : defaultValue;
+}
 export class Random {
     constructor(_rand) {
         this._rand = _rand;
