@@ -13,9 +13,10 @@ switch (search.get("color")) {
         break;
     case "low":
         field.starColors = Random.weightedPool([
-            ["#FFF", 15],
-            ["#F77", 1],
-            ["#F84", 1],
+            ["#FFF", 90],
+            ["#FF7", 30],
+            ["#F66", 10],
+            ["#F84", 2],
             ["#22A", 1],
         ]);
         break;
