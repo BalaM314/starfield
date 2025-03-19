@@ -130,7 +130,8 @@ function loop(){
 
 
 addEventListener("keydown", e => {
-  if(!e.altKey && !e.shiftKey && !e.ctrlKey && !["tab", "capslock", "ctrl", "shift", "alt", "f12"].includes(e.key.toLowerCase())){
+  if(e.key === 'Escape' && document.fullscreenEnabled) document.exitFullscreen();
+  else if(!e.altKey && !e.shiftKey && !e.ctrlKey && !["tab", "capslock", "ctrl", "shift", "alt", "f12"].includes(e.key.toLowerCase())){
     field.generate();
     needsRedraw = true;
   }
