@@ -1,5 +1,5 @@
 import { Starfield } from "./starfield.js";
-import { getElement, match, Rand, Random } from "./utils.js";
+import { debounce, getElement, match, Rand, Random } from "./utils.js";
 const canvas = getElement("canvas", HTMLCanvasElement);
 const field = new Starfield(canvas);
 const search = new URLSearchParams(location.search);
@@ -90,43 +90,36 @@ if (bigStars) {
     ]);
 }
 let frame = 0;
-let needsRedraw = false;
-function loop() {
-    frame++;
+function fixSizes() {
     if (canvas.width != document.body.clientWidth) {
         canvas.width = document.body.clientWidth;
-        needsRedraw = true;
     }
     if (canvas.height != document.body.clientHeight) {
         canvas.height = document.body.clientHeight;
-        needsRedraw = true;
     }
-    if (field.stars.length == 0) {
-        field.generate();
-        needsRedraw = true;
-    }
+    field.generate();
+    field.draw();
+}
+function loop() {
+    frame++;
     if (frame % 4 == 0 && scrollSpeed != 0) {
         let scaledScrollSpeed = (canvas.width / 1920) * scrollSpeed;
         field.scrollWrap(3 * scaledScrollSpeed, 1 * scaledScrollSpeed);
-        needsRedraw = true;
-    }
-    if (needsRedraw) {
         field.draw();
-        needsRedraw = false;
     }
     window.cancel = requestAnimationFrame(loop);
 }
 addEventListener("keydown", e => {
-    if (!e.altKey && !e.shiftKey && !e.ctrlKey && !["tab", "capslock", "ctrl", "shift", "alt", "f12"].includes(e.key.toLowerCase())) {
-        field.generate();
-        needsRedraw = true;
-    }
+    if (e.key === 'Escape' && document.fullscreenEnabled)
+        document.exitFullscreen();
+    else if (!e.altKey && !e.shiftKey && !e.ctrlKey && !["tab", "capslock", "ctrl", "shift", "alt", "f12"].includes(e.key.toLowerCase()))
+        fixSizes();
 });
 addEventListener("click", e => {
-    if (e.button == 0) {
-        field.generate();
-        needsRedraw = true;
-    }
+    if (e.button == 0)
+        fixSizes();
 });
+addEventListener("resize", debounce(fixSizes, 200));
 Object.assign(window, { field, Rand });
+fixSizes();
 loop();

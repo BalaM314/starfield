@@ -17,6 +17,18 @@ export function match(value:PropertyKey, clauses:Record<PropertyKey, unknown>, d
 	return Object.prototype.hasOwnProperty.call(clauses, value) ? clauses[value] : defaultValue;
 }
 
+/**
+ * Returns a function that calls the provided function after a delay, unless another call is received, which will abort previous calls.
+ * @param [delay=500] Delay in milliseconds.
+ */
+export function debounce(func: () => void, delay = 500){
+	let timeoutId: number | null = null;
+	return function delayedCallFunc(){
+		if(timeoutId !== null) clearTimeout(timeoutId);
+		timeoutId = setTimeout(func, delay);
+	}
+}
+
 export class Random {
 	constructor(public _rand:() => number){}
 	/** Returns a random integer between 0 and `max` inclusive. */
