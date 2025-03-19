@@ -15,6 +15,72 @@
 			margin: 0px;
 			position: absolute;
 			background-color: #000;
+			background-image: url('img/1.png');
+		}
+		button {
+			background-color: #073707;
+			color: white;
+			border: 3px solid #174717;
+			border-radius: 5px;
+			padding: 4px 10px;
+		}
+		button:hover {
+			background-color: #104010;
+			border: 3px solid #205020;
+		}
+		button:active {
+			background-color: #174717;
+			border: 3px solid #275527;
+		}
+		select {
+			background-color: #073707;
+			color: white;
+			border: 3px solid #174717;
+			border-radius: 5px;
+			padding: 4px 10px;
+		}
+		select:hover {
+			background-color: #104010;
+			border: 3px solid #205020;
+		}
+		select:active {
+			background-color: #174717;
+			border: 3px solid #275527;
+		}
+		input[type=checkbox] {
+			appearance: none;
+			margin: 0;
+			place-self: center;
+			background-color: #001000;
+			color: white;
+			border: 3px solid #174717;
+			border-radius: 5px;
+			padding: 6px;
+			width: 28px;
+			height: 28px;
+
+			display: grid;
+			place-content: center;
+		}
+		input[type="checkbox"]::before {
+			content: " ";
+			width: 16px;
+			height: 16px;
+			transition: transform 100ms ease;
+			transform: scale(0);
+			background-color: #5C5;
+			clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%); 
+		}
+		input[type="checkbox"]:checked::before {
+			transform: scale(1);
+		}
+		input[type=checkbox]:hover {
+			background-color: #001500;
+			border: 3px solid #205020;
+		}
+		input[type=checkbox]:active {
+			background-color: #002000;
+			border: 3px solid #275527;
 		}
 		#container {
 			margin: 20px;
