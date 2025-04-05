@@ -64,3 +64,14 @@ export class Random {
 
 export const Rand = new Random(Math.random);
 
+export type Rect = [x: number, y: number, width: number, height: number];
+export function rectsIntersect([aX, aY, aW, aH]:Rect, [bX, bY, bW, bH]:Rect){
+	return bX <= aX + aW && aX <= bX + bW && bY <= aY + aH && aY <= bY + bH;
+}
+
+export function constrain(x:number, min:number, max:number):number {
+	return Math.min(Math.max(x, min), max);
+}
+export function lerp(x:number, minIn:number, maxIn:number, minOut:number, maxOut:number){
+	return constrain((x - minIn) / (maxIn - minIn) * (maxOut - minOut) + minOut, minOut, maxOut);
+}

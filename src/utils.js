@@ -53,3 +53,12 @@ export class Random {
     }
 }
 export const Rand = new Random(Math.random);
+export function rectsIntersect([aX, aY, aW, aH], [bX, bY, bW, bH]) {
+    return bX <= aX + aW && aX <= bX + bW && bY <= aY + aH && aY <= bY + bH;
+}
+export function constrain(x, min, max) {
+    return Math.min(Math.max(x, min), max);
+}
+export function lerp(x, minIn, maxIn, minOut, maxOut) {
+    return constrain((x - minIn) / (maxIn - minIn) * (maxOut - minOut) + minOut, minOut, maxOut);
+}

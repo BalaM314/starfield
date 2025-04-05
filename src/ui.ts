@@ -93,6 +93,7 @@ if(bigStars){
     [14, 1],
   ]);
 }
+field.nebulaCount = [];
 
 
 declare global {

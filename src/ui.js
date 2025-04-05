@@ -91,6 +91,7 @@ if (bigStars) {
         [14, 1],
     ]);
 }
+field.nebulaCount = [];
 let frame = 0;
 function fixSizes() {
     for (const canvas of [canvas1, canvas2]) {
