@@ -11,8 +11,10 @@ type Star = {
 export class Starfield {
   constructor(
     public canvas:HTMLCanvasElement,
+    public canvas2:HTMLCanvasElement,
   ){}
-  ctx = this.canvas.getContext("2d") ?? crash(`HTML5 canvas not supported`);
+  ctx = this.canvas.getContext("2d", { alpha: false }) ?? crash(`HTML5 canvas not supported`);
+  ctx2 = this.canvas2.getContext("2d")!;
 
   background = "#000";
 

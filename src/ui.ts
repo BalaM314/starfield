@@ -1,9 +1,11 @@
 import { Starfield } from "./starfield.js";
 import { debounce, getElement, match, Rand, Random } from "./utils.js";
+import * as perlin from "./perlin.js";
 
-const canvas = getElement("canvas", HTMLCanvasElement);
+const canvas1 = getElement("canvas1", HTMLCanvasElement);
+const canvas2 = getElement("canvas2", HTMLCanvasElement);
 
-const field = new Starfield(canvas);
+const field = new Starfield(canvas1, canvas2);
 const search = new URLSearchParams(location.search);
 const scrollSpeed = match(search.get("scroll") ?? "none", {
   none: 0,
@@ -99,11 +101,13 @@ declare global {
 
 let frame = 0;
 function fixSizes(){
-  if(canvas.width != document.body.clientWidth){
-    canvas.width = document.body.clientWidth;
-  }
-  if(canvas.height != document.body.clientHeight){
-    canvas.height = document.body.clientHeight;
+  for(const canvas of [canvas1, canvas2]){
+    if(canvas.width != document.body.clientWidth){
+      canvas.width = document.body.clientWidth;
+    }
+    if(canvas.height != document.body.clientHeight){
+      canvas.height = document.body.clientHeight;
+    }
   }
   field.generate();
   field.draw();
@@ -112,7 +116,7 @@ function loop(){
   frame ++;
   
   if(frame % 4 == 0 && scrollSpeed != 0){
-    let scaledScrollSpeed = (canvas.width / 1920) * scrollSpeed;
+    let scaledScrollSpeed = (canvas1.width / 1920) * scrollSpeed;
     field.scrollWrap(3 * scaledScrollSpeed, 1 * scaledScrollSpeed);
     field.draw();
   }
@@ -130,7 +134,7 @@ addEventListener("click", e => {
 });
 addEventListener("resize", debounce(fixSizes, 200));
 
-Object.assign(window, { field, Rand });
+Object.assign(window, { field, Rand, ...perlin });
 
 fixSizes();
 loop();
