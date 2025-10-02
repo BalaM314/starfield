@@ -8,11 +8,7 @@ export class Starfield {
         this.ctx2 = this.canvas2.getContext("2d");
         this.background = "#000";
         this.starDensity = 0.015;
-        this.nebulaCount = [
-            { count: 1, data: { size: [0.12, 0.24], maxAlpha: 0.1 } },
-            { count: 10, data: { size: [0.035, 0.07], maxAlpha: 0.1 } },
-            { count: 6, data: { size: [0.06, 0.12], maxAlpha: 0.1 } },
-        ];
+        this.nebulaCount = [];
         this.nebulaColors = Random.weightedPool([
             ["#FFF", 90],
             ["#F77", 18],

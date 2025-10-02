@@ -40,11 +40,7 @@ export class Starfield {
   nebulaCount:Array<{count:number, data:{
     size: [number, number];
     maxAlpha: number;
-  }}> = [
-    {count: 1, data: {size: [0.12, 0.24], maxAlpha: 0.1}},
-    {count: 10, data: {size: [0.035, 0.07], maxAlpha: 0.1}},
-    {count: 6, data: {size: [0.06, 0.12], maxAlpha: 0.1}},
-  ];
+  }}> = [];
   nebulaColors:string[] = Random.weightedPool([
     ["#FFF", 90],
     ["#F77", 18],

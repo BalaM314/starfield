@@ -14,6 +14,7 @@ const scrollSpeed = match(search.get("scroll") ?? "none", {
   high: 0.24,
 }, 0);
 const bigStars = search.has("size-high");
+const nebulas = search.has("nebulas");
 switch(search.get("color")){
   case "none":
     field.starColors = Random.weightedPool([
@@ -93,7 +94,13 @@ if(bigStars){
     [14, 1],
   ]);
 }
-field.nebulaCount = [];
+if(nebulas){
+  field.nebulaCount = [
+    {count: 1, data: {size: [0.12, 0.24], maxAlpha: 0.1}},
+    {count: 10, data: {size: [0.035, 0.07], maxAlpha: 0.15}},
+    {count: 6, data: {size: [0.06, 0.12], maxAlpha: 0.15}},
+  ]
+}
 
 
 declare global {
